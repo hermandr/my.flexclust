@@ -217,6 +217,7 @@ createBarchartPanel <- function(m, col, mcol, mlcol, shade, diff, byvar)
 
         #browser()
         
+        # There is something wrong with logic here
         if(length(shade)==1){
             if(shade){
                 d1 <- abs(x-m) >= diff[1]
