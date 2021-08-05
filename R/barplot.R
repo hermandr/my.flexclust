@@ -195,9 +195,11 @@ Barchart <- function(x, m, which=NULL, col=NULL, mcol="darkred",
 
 createBarchartPanel <- function(m, col, mcol, mlcol, shade, diff, byvar)
 {
+    # KKK is the K segment being processed
     KKK <- 1
     KKKplus <- function() KKK <<- KKK+1
 
+    # Default setting for differences to flag significant shading
     if(is.null(diff))
         diff <- c(1/4, 0.5)
     else
@@ -218,7 +220,7 @@ createBarchartPanel <- function(m, col, mcol, mlcol, shade, diff, byvar)
         #browser()
         
         # There is something wrong with logic here
-        if(length(shade)==1){
+        if(length(shade)==1){ # Defined as a T or F
             if(shade){
                 d1 <- abs(x-m) >= diff[1]
                 d2 <- abs((x-m)/m) >= diff[2]
@@ -229,10 +231,10 @@ createBarchartPanel <- function(m, col, mcol, mlcol, shade, diff, byvar)
             }
         }
         else{
-            if(is.matrix(shade)){
-                if(byvar)
+            if(is.matrix(shade)){ # shade defined as a matrix?
+                if(byvar) # Plot profile by var
                     shade <- shade[,KKK]
-                else
+                else # Plot by segment
                     shade <- shade[KKK,]
                 ## reverse to match reversing in Barchart() above
                 shade <- rev(rep(as.logical(shade), length=length(x)))
